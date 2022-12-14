@@ -1,0 +1,48 @@
+##
+## Ververica Platform application configuration - minimal config
+##
+vvp:
+
+  persistence:
+    type: local
+
+  blobStorage:
+    baseUri: s3://<BUCKET>
+
+  ## License configuration.
+  #license:
+  #  data: {}  # The contents of a Ververica Platform license
+  license:
+    data: {
+      "kind" : "License",
+      "apiVersion" : "v1",
+        "metadata" : {
+            LICENSE_METADATA_FROM_ACTUAL_LICENSE
+        },
+        "spec" : {
+          LICENSE_SPEC_FROM_ACTUAL_LICENSE
+        }
+    }
+
+##
+## Security Context of Ververica Platform Pod. Comment out when running on OpenShift.
+##
+# Empty securityContext for OpenShift
+securityContext:
+
+##
+## Container configuration for the application manager component
+##
+appmanager:
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 4Gi
+    requests:
+      cpu: 250m
+      memory: 4Gi
+
+blobStorageCredentials:
+ s3:
+  accessKeyId: <AWS_ACCESS_KEY_ID>
+  secretAccessKey: <AWS_ACCESS_KEY_SECRET>
